@@ -10,18 +10,13 @@ const recipeSchema = new Schema(
       type: Boolean,
       required: true,
     },
-    tags: [{ type: String, required: true }],
     image: String,
     difficulty: {
       type: String,
       enum: ["Easy", "Medium", "Hard"],
       required: true,
     },
-    totalTime: {
-      type: Number,
-      min: 0,
-    },
-    prepTime: {
+    time: {
       type: Number,
       min: 0,
     },
