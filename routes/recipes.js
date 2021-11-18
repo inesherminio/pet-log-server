@@ -174,7 +174,7 @@ router.patch(
 
 router.delete("/:recipeId", isLoggedIn, (req, res, next) => {
   const { recipeId } = req.params;
-  console.log(req.params);
+  //console.log(req.params);
   Recipe.findByIdAndRemove(recipeId)
     .then((res) => {
       res.json("Recipe deleted");

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const authRoutes = require("./auth");
 const recipesRoutes = require("./recipes");
+const photosRoutes = require("./photos");
 
 // Handles cloudinary
 const fileUploader = require("../config/cloudinary.config");
@@ -23,5 +24,6 @@ router.post("/upload", fileUploader.single("fileUrl"), (req, res, next) => {
 // All other routes
 router.use("/auth", authRoutes);
 router.use("/recipes", recipesRoutes);
+router.use("/photos", photosRoutes);
 
 module.exports = router;
