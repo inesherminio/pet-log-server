@@ -46,7 +46,7 @@ module.exports = (app) => {
         mongoUrl: process.env.MONGO_URI,
       }),
       cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 365,
+        maxAge: 50000000,
         //SameSite: "none",
         secure: process.env.NODE_ENV === "production",
       },

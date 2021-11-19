@@ -16,7 +16,7 @@ const petSchema = new Schema(
     breed: String,
     gender: {
       type: String,
-      enum: ["Male", "Female"],
+      enum: ["Male", "Female", ""],
     },
     weight: {
       type: Number,

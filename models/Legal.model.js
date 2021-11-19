@@ -9,8 +9,11 @@ const legalSchema = new Schema(
     },
     entity: String,
     documentId: String,
-    files: [{ type: String }],
     expirationDate: { type: Date, required: true },
+    pet: {
+      type: Schema.Types.ObjectId,
+      ref: "Pet",
+    },
   },
   {
     timestamps: true,

@@ -175,11 +175,12 @@ router.patch(
 router.delete("/:recipeId", isLoggedIn, (req, res, next) => {
   const { recipeId } = req.params;
   //console.log(req.params);
-  Recipe.findByIdAndRemove(recipeId)
-    .then((res) => {
-      res.json("Recipe deleted");
+  Recipe.findByIdAndDelete(recipeId)
+    .then((recipe) => {
+      return res.json("Recipe deleted");
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       return res.status(400).json({ errorMessage: "Problem deleting recipe" });
     });
 });
