@@ -211,7 +211,6 @@ router.patch("/:recipeId", isLoggedIn, (req, res, next) => {
     { new: true }
   )
     .then((recipe) => {
-      console.log(recipe);
       res.status(201).json({ recipe });
     })
     .catch(() => {

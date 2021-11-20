@@ -5,9 +5,9 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/", isLoggedIn, (req, res, next) => {
   User.findById(req.session.user._id)
-    //.populate("favRecipes favServices pets")
+    .populate("favRecipes pets")
     .then((user) => {
-      console.log(user);
+      //console.log(user);
       return res.json(user);
     })
     .catch(() => {
@@ -59,6 +59,76 @@ router.post("/add", isLoggedIn, async (req, res, next) => {
   } catch (error) {
     return res.status(400).json({ errorMessage: "Problem adding pet" });
   }
+});
+
+router.post("legal/add", isLoggedIn, (req, res, next) => {
+  const { category, entity, documentId, expirationDate, pet } = req.body;
+  console.log("hello");
+});
+
+router.get("/:petId", isLoggedIn, (req, res, next) => {
+  const { petId } = req.params;
+  Pet.findById(petId)
+    .then((pet) => {
+      return res.json(pet);
+    })
+    .catch(() => {
+      return res.status(400).json({ errorMessage: "Problem accessing pets" });
+    });
+});
+
+router.patch("/:petId", isLoggedIn, (req, res, next) => {
+  const { petId } = req.params;
+  console.log(req.params);
+  const {
+    type,
+    name,
+    profilePic,
+    birthday,
+    breed,
+    gender,
+    weight,
+    avgDailyFood,
+    chipId,
+  } = req.body;
+  Pet.findByIdAndUpdate(
+    petId,
+    {
+      type,
+      name,
+      profilePic,
+      birthday,
+      breed,
+      gender,
+      weight,
+      avgDailyFood,
+      chipId,
+    },
+    { new: true }
+  )
+    .then((pet) => {
+      return res.json({ pet });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ errorMessage: "Problem editing pets" });
+    });
+});
+
+router.delete("/:petId", isLoggedIn, (req, res, next) => {
+  const { petId } = req.params;
+  console.log(req.params);
+  Pet.findByIdAndRemove(petId)
+    .then((pet) => {
+      return User.findById(req.session.user._id).populate("favRecipes pets");
+    })
+    .then((user) => {
+      res.status(200).json({ user });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ errorMessage: "Problem editing pets" });
+    });
 });
 
 module.exports = router;
