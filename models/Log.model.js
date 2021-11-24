@@ -11,19 +11,24 @@ const logSchema = new Schema(
       type: String,
       required: true,
     },
-    pet: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Pet",
-        required: true,
-      },
-    ],
-    Date: {
+    pet: {
+      type: Schema.Types.ObjectId,
+      ref: "Pet",
+      required: true,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    date: {
       type: Date,
       required: true,
     },
+    expirationDate: {
+      type: Date,
+    },
     comment: String,
-    files: [{ type: String }],
     foodBrand: String,
     foodFlavor: String,
     foodQuantity: {

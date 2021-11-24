@@ -23,11 +23,12 @@ const serviceSchema = new Schema(
       type: {
         type: String,
         enum: ["Point"],
+        required: true,
       },
       coordinates: {
         type: [Number],
+        required: true,
       },
-      required: true,
     },
     description: {
       type: String,
