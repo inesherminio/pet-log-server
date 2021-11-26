@@ -69,6 +69,7 @@ router.post("legal/add", isLoggedIn, (req, res, next) => {
 router.get("/:petId", isLoggedIn, (req, res, next) => {
   const { petId } = req.params;
   Pet.findById(petId)
+    .populate("logs")
     .then((pet) => {
       return res.json(pet);
     })

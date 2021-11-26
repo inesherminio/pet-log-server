@@ -6,6 +6,7 @@ const userRoutes = require("./user");
 const petsRoutes = require("./pets");
 const petServicesRoutes = require("./petServices");
 const logsRoutes = require("./logs");
+const eventsRoutes = require("./events");
 
 // Handles cloudinary
 const fileUploader = require("../config/cloudinary.config");
@@ -33,5 +34,6 @@ router.use("/user", userRoutes);
 router.use("/pets", petsRoutes);
 router.use("/services", petServicesRoutes);
 router.use("/journal", logsRoutes);
+router.use("/events", eventsRoutes);
 
 module.exports = router;

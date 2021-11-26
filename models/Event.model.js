@@ -14,6 +14,7 @@ const eventSchema = new Schema(
         "Legal",
         "Food",
         "Other",
+        "Birthday",
       ],
       required: true,
     },
@@ -21,14 +22,17 @@ const eventSchema = new Schema(
       type: String,
       required: true,
     },
-    pet: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Pet",
-        required: true,
-      },
-    ],
-    Date: {
+    pet: {
+      type: Schema.Types.ObjectId,
+      ref: "Pet",
+      required: true,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    date: {
       type: Date,
       required: true,
     },
