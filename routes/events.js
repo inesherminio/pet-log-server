@@ -16,7 +16,11 @@ router.post("/add", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/", isLoggedIn, (req, res, next) => {
-  Event.find({ date: { $gt: Date.now() } }, {}, { sort: "date", limit: 4 })
+  Event.find(
+    { $and: [{ date: { $gt: Date.now() } }, { owner: req.session.user._id }] },
+    {},
+    { sort: "date", limit: 4 }
+  )
     .populate("pet")
     .then((events) => {
       return res.status(201).json({ events });
