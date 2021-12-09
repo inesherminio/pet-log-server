@@ -132,4 +132,21 @@ router.delete("/:petId", isLoggedIn, (req, res, next) => {
     });
 });
 
+router.patch("/:petId/removeFromPets", isLoggedIn, async (req, res, next) => {
+  const { petId } = req.params;
+
+  try {
+    const user = await User.findById(req.session.user._id).exec();
+    const pet = await Pet.findById(petId).exec();
+    user.pets.splice(user.pets.indexOf(pet), 1);
+    const updatedUser = await user.save();
+    res.status(201).json({ user: updatedUser });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .json({ errorMessage: "Problem removing pet from user's pets" });
+  }
+});
+
 module.exports = router;
